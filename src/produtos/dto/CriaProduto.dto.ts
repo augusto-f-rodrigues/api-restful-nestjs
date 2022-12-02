@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsArray, IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
 import { CaracteristicasProdutoDTO } from './CaracteristicasProduto.dto';
 import { ImagemProdutoDTO } from './ImagemProduto.dto';
 
@@ -15,10 +16,14 @@ export class CriaProdutoDTO {
   @IsNotEmpty()
   descricao: string;
 
-  @IsNotEmpty()
+  @ValidateNested()
+  @IsArray()
+  @Type(() => CaracteristicasProdutoDTO)
   caracteristicas: CaracteristicasProdutoDTO[];
 
-  @IsNotEmpty()
+  @ValidateNested()
+  @IsArray()
+  @Type(() => ImagemProdutoDTO)
   imagens: ImagemProdutoDTO[];
 
   @IsNotEmpty()
