@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsuarioRepository {
@@ -11,5 +11,13 @@ export class UsuarioRepository {
 
   async listar() {
     return this.usuarios;
+  }
+
+  async existeComEmail(email) {
+    const emailJaCadastrado = this.usuarios.find(
+      usuario => usuario.email === email,
+    );
+
+    return emailJaCadastrado != undefined;
   }
 }
