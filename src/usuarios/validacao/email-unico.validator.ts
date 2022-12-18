@@ -8,7 +8,6 @@ import {
 } from 'class-validator';
 import { UsuarioRepository } from '../usuario.repository';
 
-
 @Injectable()
 @ValidatorConstraint({ async: true })
 export class EmailUnicoValidator implements ValidatorConstraintInterface {
@@ -18,13 +17,15 @@ export class EmailUnicoValidator implements ValidatorConstraintInterface {
     value: any,
     validationArguments?: ValidationArguments,
   ): Promise<boolean> {
-    const usuarioComEmailExiste = await this.usuarioRepository.existeComEmail(value)
+    const usuarioComEmailExiste = await this.usuarioRepository.existeComEmail(
+      value,
+    );
 
     /* 
     Na função validate se for retornado o valor FALSE significa que queremos disparar um erro, como a função acima retorna TRUE caso o usuario com email já exista, então retornaremos a negação do valor retornado acima
     */
 
-    return !usuarioComEmailExiste
+    return !usuarioComEmailExiste;
   }
 }
 
@@ -35,7 +36,7 @@ export const EmailUnico = (opcoesDeValidacao: ValidationOptions) => {
       propertyName: propriedade,
       options: opcoesDeValidacao,
       constraints: [],
-      validator: EmailUnicoValidator
-    })
-  }
-}
+      validator: EmailUnicoValidator,
+    });
+  };
+};

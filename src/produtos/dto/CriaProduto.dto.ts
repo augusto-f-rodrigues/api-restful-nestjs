@@ -1,12 +1,18 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsNumber, IsUUID, ValidateNested } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsUUID,
+  ValidateNested,
+} from 'class-validator';
 import { CaracteristicasProdutoDTO } from './CaracteristicasProduto.dto';
 import { ImagemProdutoDTO } from './ImagemProduto.dto';
 
 export class CriaProdutoDTO {
-  @IsUUID(undefined, {message: 'User ID invalid.'})
-  usuarioId: string
-  
+  @IsUUID(undefined, { message: 'User ID invalid.' })
+  usuarioId: string;
+
   @IsNotEmpty()
   nome: string;
 
